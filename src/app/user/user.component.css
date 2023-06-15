@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: url("src/assets/home.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.container {
+  justify-content: center;
+  align-items: center;
+  min-height: 110vh;
+}
+/***************************************** navbar *********************************************/
+.navigation {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  line-height: 100px;
+  background: linear-gradient(rgba(39,39,39,0.6), transparent);
+  z-index: 100;
+  margin-left: -321px;
+  margin-bottom: 200px;
+}
+.nav-menu ul li .link:hover,
+.nav-menu ul li .link:active,
+.nav-menu ul li .link:focus{
+  color: rgba(64, 108, 134,1.8);
+  border-bottom: 2px solid #fff;
+}
+
+.nav-logo a {
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.nav-menu ul {
+  display: flex;
+}
+
+.nav-menu ul li {
+  list-style-type: none;
+}
+
+.nav-menu ul li .link {
+  text-decoration: none;
+  font-weight: 400;
+  color: #fff;
+  padding-bottom: 15px;
+  margin: 0 25px;
+
+}
+
+/*
+.link:hover,
+.active {
+  border-bottom: 2px solid #fff;
+} */
+
+.collapse,
+.nav a{
+  color: white;
+  display: flex;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  font-weight: 400px;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+}
+.nav a:hover,
+.nav a:active,
+.nav a:focus {
+  color: rgba(64, 108, 134,1.8);
+  text-decoration: underline;
+  border: none;
+}
+.nav-pills i{
+  margin-right: 5px;
+}
+#idLink {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/* ************************* Content *****************************  */
+
+
+
+.navbar{
+
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  /*float: top; */
+  margin-top: 50px;
+
+}
+
+
+.smallTitle {
+  color: white;
+  display: flex;
+  margin-top: 100px;
+}
+/*
+
+.container {
+  position: relative;
+}
+*/
+#tableUsers{
+  color: white;
+
+}
+#tableUsers tr:hover {
+  background-color: rgba(255, 250, 240, 0.5);
+}
+
+
+.smallTitle small{
+  text-decoration: underline;
+}
+#new-user-save,
+#new-user-close,
+.btn.btn-primary,
+.btn.btn-info,
+.nav a,
+#searchForm {
+  border: none;
+}
+#isActive,
+#isInactive{
+  border-radius: 20px 20px 20px 20px;
+  background-color: transparent;
+}
+
+#isActive{
+  color: rgb(14, 234, 35);
+}
+#isInactive{
+  color: rgb(234, 8, 8);
+}
+#btn-tableau .btn{
+  border-radius: 20px 20px 20px 20px;
+  border: none;
+
+}
+.edit-btn{
+  margin-right: 12px;
+  color: white;
+}
+.edit-btn:hover,
+.btn.btn-info:hover{
+  background-color: dodgerblue;
+  border: none;
+}
+.pass-reset legend,
+.pass-reset label,
+.text-muted{
+  color: white;
+}
+.reset-form{
+  border-radius: 20px 20px 20px 20px;
+}
+.tab-profile input,
+.form-role,
+.logout-btn{
+  border-radius: 20px 20px 20px 20px;
+}
+.permission-user{
+  background-color: rgba(255, 255, 255,0.3);
+}
+.card-body h6{
+  color: white;
+}
+.pass-reset label,
+.pass-reset small{
+  margin-bottom: 30px;
+  margin-top: 10px;
+  text-decoration: underline;
+}
+.btn.btn-resetPass{
+  margin-bottom: 30px;
+  text-align: right;
+}
+.form-group input{
+  border-radius:  20px 20px 20px 20px;
+}
+.form-check input{
+  border-radius: 50%;
+}
+
+

@@ -1,0 +1,147 @@
+<!--<div class="container" style="margin-top: 100px;">
+  <div class="d-flex justify-content-center h-50">
+      <div class="user_card">
+        <div class="d-flex justify-content-center">
+          <div style="margin-top: 10px;margin-bottom:-90px;">
+            <h3>User Management Portal</h3>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center form_container">
+          <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)">
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control" name="firstName" placeholder="First name" required ngModel #firstNameInput="ngModel">
+            </div>
+            <span class="help-block" *ngIf="firstNameInput.invalid && firstNameInput.touched" style="color:red;">Please enter a first name</span>
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control" name="lastName" placeholder="Last name" required ngModel #lastNameInput="ngModel">
+            </div>
+            <span class="help-block" *ngIf="lastNameInput.invalid && lastNameInput.touched" style="color:red;">Please enter a last name</span>
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+              </div>
+              <input type="text" class="form-control" name="username" placeholder="Username" required ngModel #usernameInput="ngModel">
+            </div>
+            <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched" style="color:red;">Please enter a username</span>
+            <div class="input-group mb-2">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+              </div>
+              <input type="text" class="form-control" name="email" placeholder="Email" required ngModel #emailInput="ngModel">
+            </div>
+            <span class="help-block" *ngIf="emailInput.invalid && emailInput.touched" style="color:red;">Please enter an email.</span>
+        <div class="d-flex justify-content-center mt-3 login_container">
+          <button [disabled]="registerForm.invalid || showLoading" type="submit" name="button" class="btn login_btn">
+            <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
+            <span *ngIf="showLoading">Loading...</span>
+            <span *ngIf="!showLoading">Register</span>
+          </button>
+        </div>
+      </form>
+    </div>
+        <div class="mt-4">
+          <div class="d-flex justify-content-center links">
+            Already have an account? <a routerLink="/login"  class="ml-2" style="color: #2C3E50;">Log In</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>-->
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <title>My-Task</title>
+</head>
+
+<body>
+<div class="wrapper">
+  <nav class="nav">
+    <div class="nav-logo">
+      <a class=" custom-link" id="Logo" routerLink="/home">My-Task.</a>
+    </div>
+    <div class="nav-menu">
+      <ul>
+        <li><a href="#" class="link " routerLink="/home">Home</a></li>
+        <li><a href="#" class="link" routerLink="/user/management">Users-Managment</a></li>
+        <li><a href="#" class="link" routerLink="/task">Tasks</a></li>
+        <li><a href="#" class="link" routerLink="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="nav-button">
+      <button class="btn login-btn" id="loginBtn" onclick="login()">Sign In</button>
+    </div>
+    <div class="nav-menu-btn"></div>
+    <i class="bx bx-menu" onclick="myMenuFunctions()"></i>
+  </nav>
+
+
+  <!--------------------------------------------Form Box-------------------------------------------------------------->
+  <div class="form-box">
+<!--------------------Register Form-------------------------------->
+
+<div class="register-container" id="register">
+  <div class="top">
+    <span>Have an account? <a href="#" onclick="login()">Login</a></span>
+    <header>Sign Up</header>
+  </div>
+  <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)">
+  <div class="two-forms">
+    <div class="input-box">
+      <input type="text" class="input-field" name="firstName" placeholder="First name" required ngModel #firstNameInput="ngModel">
+      <span class="help-block" *ngIf="firstNameInput.invalid && firstNameInput.touched" style="color:white;">Please enter a first name</span>
+      <i class="bx bx-user"></i>
+    </div>
+    <div class="input-box">
+      <input type="text" class="input-field" name="lastname" placeholder="Last name" required ngModel #lastNameInput="ngModel">
+      <span class="help-block" *ngIf="lastNameInput.invalid && lastNameInput.touched" style="color:white;">Please enter a last name</span>
+      <i class="bx bx-user"></i>
+    </div>
+  </div>
+    <div class="input-box">
+      <input type="text" class="input-field" name="username" placeholder="Username" required ngModel #usernameInput="ngModel">
+    <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched" style="color:white;">Please enter a username</span>
+      <i class="bx bx-user"></i>
+    </div>
+  <div class="input-box">
+    <input type="text" class="input-field" name="email" placeholder="Email" required ngModel #emailInput="ngModel">
+    <span class="help-block" *ngIf="emailInput.invalid && emailInput.touched" style="color:white;">Please enter an email.</span>
+    <i class="bx bx-envelope"></i>
+  </div>
+ <!-- <div class="input-box">
+    <input type="password" class="input-field" placeholder="Password">
+    <i class="bx bx-lock-alt"></i>
+    <div class="input-box">
+      <input type="file" class="input-field" placeholder="Profile-image">
+      <i class="bx bx-image"></i>
+    </div>
+  </div>-->
+  <div class="input-box">
+    <input type="submit" class="submit" value="Register">
+    <span *ngIf="showLoading">Loading...</span>
+    <span *ngIf="!showLoading">Register</span>
+  </div>
+  </form>
+  <div class="two-col">
+    <div class="one">
+      <input type="checkbox" id="register-check">
+      <label for="register-check">Remember Me</label>
+    </div>
+    <div class="two">
+      <label><a href="#">Terms & conditions</a></label>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</body>
+
