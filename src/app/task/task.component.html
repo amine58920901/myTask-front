@@ -15,7 +15,7 @@
     </div>
     <div class="nav-menu">
       <ul>
-        <li><a href="#" class="link" routerLink="/user/management">Users-Managment</a></li>
+        <li><a [hidden]="!isAdmin" href="#" class="link" routerLink="/user/management">Users-Managment</a></li>
         <li><a href="#" class="link" routerLink="/task">Tasks</a></li>
         <li><a href="#" class="link" routerLink="/contact">Contact</a></li>
       </ul>
@@ -33,6 +33,18 @@
   </div>
 
   <!-- nav bar -->
+
+  <nav class="navbar navbar-expand-md breadcrumb">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="nav nav-pills">
+        <a class="nav-item nav-link move-right mr-3" (click)="changeTitle('Profile')" data-toggle="tab" href="#profile">
+          Welcome, {{currentUser?.username}}
+          <i class='bx bxs-user-detail'></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
   <div class="tab-content mt-3" id="myTabContent">
     <!-- user table -->
     <div class="tab-pane fade show active" id="tasks">
@@ -47,7 +59,7 @@
           </button>
         </div>
         <div class="btn-group">
-          <button type="button" (click)="getAllTasks(true)" class="btn btn-info">
+          <button type="button" (click)="getTasksByCurrentUser('true')" class="btn btn-info">
             <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i><i *ngIf="!refreshing" class="fas fa-sync"></i>
           </button>
         </div>
@@ -67,12 +79,9 @@
 
         </tr>
         </thead>
-        <tbody *ngFor="let appTask of tasks">
+        <tbody *ngFor="let appTask of currentUserTasks">
         <tr class="text-center">
-          <td (click)="onSelectTask(appTask)">
-            <img height="40" width="40" src="{{appTask?.profileImageUrl}}" class="rounded-circle img-fluid img-thumbnail" alt=""/>
-          </td>
-          <td (click)="onSelectTask(appTask)">{{appTask?.taskId}}</td>
+          <td (click)="logTaskId(appTask)">{{ appTask?.taskId }}</td>
           <td (click)="onSelectTask(appTask)">{{appTask?.title}}</td>
           <td (click)="onSelectTask(appTask)">{{appTask?.description}}</td>
           <td (click)="onSelectTask(appTask)">{{appTask?.dateTask}}</td>
@@ -81,17 +90,17 @@
           <td (click)="onSelectTask(appTask)">{{appTask?.userId}}</td>
           <td (click)="onSelectTask(appTask)">{{appTask?.username}}</td>
           <td (click)="onSelectTask(appTask)">
-            <span [hidden]="!appTask?.active" class="badge badge-success" id="isActive">Active</span>
-            <span [hidden]="appTask?.finish" class="badge badge-danger" id="isInactive" >Inactive</span>
+            <span [hidden]="!appTask?.active" class="badge badge-success" id="isActive">To do</span>
+            <span [hidden]="appTask?.finish" class="badge badge-danger" id="isInactive" >Finish</span>
           </td>
-         <!-- <td class="">
+          <td class="">
             <div class="btn-group" id="btn-tableau">
-              <button class="btn btn-outline-info edit-btn" (click)="onEditUser(appUser)"><i class="fas fa-edit"></i>
+              <button class="btn btn-outline-info edit-btn" (click)="onEditTask(appTask)"><i class="fas fa-edit"></i>
               </button>
-              <button [hidden]="!isAdmin" class="btn btn-outline-danger" (click)="onDeleteUder(appUser?.username)"><i class="fas fa-trash"></i>
+              <button  class="btn btn-outline-danger" (click)="onDeleteTask(appTask?.taskId)"><i class="fas fa-trash"></i>
               </button>
             </div>
-          </td>-->
+          </td>
         </tr>
         </tbody>
       </table>

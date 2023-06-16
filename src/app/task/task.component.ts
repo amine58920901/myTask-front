@@ -10,6 +10,7 @@ import { NotificationService } from '../service/notification.service';
 import { TaskService } from '../service/task.service';
 import { UserComponent } from '../user/user.component';
 import { Role } from '../enum/role.enum';
+import { User } from '../model/user';
 
 
 @Component({
@@ -22,8 +23,8 @@ export class TaskComponent extends UserComponent implements OnInit  {
   tasks: Task[];
   private titleSubject = new BehaviorSubject<string>('Tasks');
   public titleAction$ = this.titleSubject.asObservable();
-  // @ts-ignore
-  public tasks : Task[];
+
+ /* public tasks : Task[]; */
   public task: Task;
   public refreshing: boolean;
   public selectedTask: Task;
@@ -33,6 +34,9 @@ export class TaskComponent extends UserComponent implements OnInit  {
   public editTask = new Task();
   private currentTitle: string;
   public fileStatus = new FileUploadStatus();
+  public currentUser : User;
+  currentUserTasks: Task[];
+
 
 
   constructor(private taskService: TaskService, private notificationService: NotificationService,private router: Router, private authenticationService: AuthenticationService, ) {
@@ -41,8 +45,31 @@ export class TaskComponent extends UserComponent implements OnInit  {
   }
 
   ngOnInit() {
-    this.getAllTasks(true);
-    console.log('initialisation')
+    this.getCurrentUser();
+    this.getTasksByCurrentUser(this.currentUser.username);
+  }
+
+  logTaskId(appTask: Task): void {
+    console.log(appTask.taskId);
+  }
+  
+  getTasksByCurrentUser(username: string) {
+    this.taskService.getAllTasksByUsername(username).subscribe(
+      (tasks: Task[]) => {
+        this.currentUserTasks = tasks;
+        this.tasks = tasks;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
+
+
+  private getCurrentUser(): void {
+    this.currentUser = this.authenticationService.getUserFromLocalCache();
   }
 
   public changeTitle(title: string): void {
@@ -68,26 +95,7 @@ export class TaskComponent extends UserComponent implements OnInit  {
       )
     );
   }
-  public getTasks(showNotification: boolean): void {
-    this.refreshing = true;
-    this.subscriptions.push(
-      this.taskService.getAllTasks().subscribe(
-        (response: Task[]) => {
-          this.taskService.addTasksToLocalCache(response);
-          this.tasks = response;
-          this.refreshing = false;
-          if (showNotification) {
-            this.sendNotification(NotificationType.SUCCESS, `${response.length} user(s) loaded successfully.`);
-          }
-        },
-        (errorResponse: HttpErrorResponse) => {
-          this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
-          this.refreshing = false;
-        }
-      )
-    );
 
-  }
 
   getTaskById(id: number) {
     this.taskService.getTaskById(id).subscribe(
@@ -122,16 +130,27 @@ export class TaskComponent extends UserComponent implements OnInit  {
     );
   }
 
-  deleteTask(id: number) {
+ public onDeleteTask(id: number): void {
+   this.subscriptions.push(
     this.taskService.deleteTask(id).subscribe(
-      () => {
-        // La tâche a été supprimée avec succès
+      // @ts-ignore
+      (response: CustomHttpResponse) => {
+        this.sendNotification(NotificationType.SUCCESS, response.message);
+        this.getUsers(false);
       },
-      (error) => {
-        console.log(error);
+      (error: HttpErrorResponse) => {
+        this.sendNotification(NotificationType.ERROR, error.error.message);
       }
+    )
     );
   }
+
+  public onEditTask(editTask: Task): void {
+    this.editTask = editTask;
+    this.currentTitle = editTask.title;
+    this.clickButton('openTaskEdit');
+  }
+
 
   getAllTasksByUsername(username: string) {
     this.taskService.getAllTasksByUsername(username).subscribe(

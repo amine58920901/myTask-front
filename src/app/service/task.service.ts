@@ -14,27 +14,27 @@ export class TaskService {
   constructor(private http: HttpClient) { }
 
   getAllTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(`${this.host}/tasks/list`);
+    return this.http.get<Task[]>(`${this.host}${this.apiUrl}/list`);
   }
 
   getTaskById(id: number): Observable<Task> {
-    return this.http.get<Task>(`${this.apiUrl}/${id}`);
+    return this.http.get<Task>(`${this.host}${this.apiUrl}/${id}`);
   }
 
   createTask(task: Task): Observable<Task> {
-    return this.http.post<Task>(`${this.apiUrl}/add`, task);
+    return this.http.post<Task>(`${this.host}${this.apiUrl}/add`, task);
   }
 
   updateTask(id: number, task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/${id}`, task);
+    return this.http.put<Task>(`${this.host}${this.apiUrl}/${id}`, task);
   }
 
   deleteTask(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.host}${this.apiUrl}/${id}`);
   }
 
   getAllTasksByUsername(username: string): Observable<Task[]> {
-    return this.http.get<Task[]>(`${this.apiUrl}/user/${username}`);
+    return this.http.get<Task[]>(`${this.host}${this.apiUrl}/user/${username}`);
   }
   public addTasksToLocalCache(tasks: Task[]): void {
     localStorage.setItem('tasks', JSON.stringify(tasks));

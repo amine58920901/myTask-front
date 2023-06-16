@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { Role } from '../enum/role.enum';
 import { FileUploadStatus } from '../model/file-upload.status';
 import { User } from '../model/user';
 import { AuthenticationService } from '../service/authentication.service';
@@ -51,5 +52,10 @@ export class HomeComponent extends UserComponent implements OnInit  {
 
   private clickButton(buttonId: string): void {
     document.getElementById(buttonId).click();
+  }
+  public get isAdmin(): boolean {
+    
+    // @ts-ignore
+    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
   }
 }

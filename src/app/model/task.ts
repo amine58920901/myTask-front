@@ -1,7 +1,7 @@
 import { User } from "./user";
 
 export class Task {
-  public taskId: string;
+  public taskId: number;
   public title: string;
   public description: string;
   public dateTask: Date;
@@ -14,7 +14,7 @@ export class Task {
   public authorities: [];
 
   constructor() {
-    this.taskId = '';
+    this.taskId = null;
     this.title = '';
     this.description = '';
     this.dateTask = null;
@@ -24,5 +24,6 @@ export class Task {
     this.active = false;
     this.finish = false;
     this.authorities = [];
+    this.username = "";
   }
 }

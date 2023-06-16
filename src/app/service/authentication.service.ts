@@ -8,6 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
+
   public host = environment.apiUrl;
   private token: string;
   private loggedInUsername: string;
@@ -65,6 +66,10 @@ export class AuthenticationService {
       this.logOut();
       return false;
     }
+  }
+
+  public getCurrentUser(): Observable<User> {
+    return this.http.get<User>(`${this.host}/users/current-user`);
   }
 
 }

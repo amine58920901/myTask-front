@@ -16,8 +16,8 @@
     </div>
     <div class="nav-menu">
       <ul>
-        <li><a href="#" class="link " routerLink="/home">Home</a></li>
-        <li><a href="#" class="link" routerLink="/user/management">Users-Managment</a></li>
+
+        <li><a [hidden]="!isAdmin" href="#" class="link" routerLink="/user/management">Users-Managment</a></li>
         <li><a href="#" class="link" routerLink="/task">Tasks</a></li>
         <li><a href="#" class="link" routerLink="/contact">Contact</a></li>
       </ul>
